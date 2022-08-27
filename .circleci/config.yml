@@ -5,16 +5,16 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 
-  commands:
-    print_pipeline_id:
-      description: "A very simple command for demonstration purposes"
-      parameters:
+commands:
+  print_pipeline_id:
+    description: "A very simple command for demonstration purposes"
+    parameters:
 #        to:
 #          type: string
 #          default: "Hello World from command"
-      steps:
+    steps:
 #        - run: echo << parameters.to >>
-        - run: echo $CIRCLE_WORKFLOW_ID
+      - run: echo $CIRCLE_WORKFLOW_ID
 
 
 
