@@ -20,34 +20,51 @@ commands:
 
 jobs:
 
+  # save_hello_world_output:
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     - run: echo "text to output here" > ~/output.txt
+  #     - persist_to_workspace:
+  #         root: ~/
+  #         paths:
+  #           - output.txt
+  #     - print_pipeline_id:
+  #         to: "Testing command"
+
+  # print_output_file:
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     - attach_workspace:
+  #         at: ~/
+  #     - run: cat ~/output.txt
+
+
   save_hello_world_output:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: echo "text to output here" > ~/output.txt
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - output.txt
-      - print_pipeline_id:
-          to: "Testing command"
+      - ru: echo "text to output here" 
 
-  print_output_file:
+  Forerros:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - attach_workspace:
-          at: ~/
-      - run: cat ~/output.txt
-      
+      - run: echo "Error"
+      when: on_fail   
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  # say-hello-workflow:
+  #   jobs:
+  #     - save_hello_world_output
+  #     - print_output_file:
+  #         requires:
+  #           - save_hello_world_output
+
+  TestErrorworkflow:
     jobs:
       - save_hello_world_output
-      - print_output_file:
-          requires:
-            - save_hello_world_output
-
+      - Forerros
